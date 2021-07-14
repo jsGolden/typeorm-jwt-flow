@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 
 import { User } from '../models/User';
-import { AppError } from '../error/AppError';
+import { AppError } from '../errors/AppError';
 
 const uuidv4Regex = new RegExp(
   /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/,
