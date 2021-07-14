@@ -6,6 +6,7 @@ const usersRoutes = Router();
 const usersController = new UsersController();
 
 usersRoutes.get('/', usersController.index);
+usersRoutes.post('/', usersController.store);
 
 usersRoutes.get('/:id', usersController.show);
 
