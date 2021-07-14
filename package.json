@@ -6,7 +6,8 @@
   "scripts": {
     "dev:start": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose stop"
+    "docker:down": "docker-compose stop",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
