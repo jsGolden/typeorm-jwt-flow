@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import { UsersController } from '../controllers/UsersController';
 
-const usersRoutes = Router();
+const usersRouter = Router();
 
 const usersController = new UsersController();
 
-usersRoutes.get('/', usersController.index);
-usersRoutes.post('/', usersController.store);
+usersRouter.get('/', usersController.index);
+usersRouter.post('/', usersController.create);
 
-usersRoutes.get('/:id', usersController.show);
+usersRouter.get('/:id', usersController.show);
 
-export { usersRoutes };
+export { usersRouter };

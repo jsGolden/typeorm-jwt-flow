@@ -1,5 +1,6 @@
 import { getRepository } from 'typeorm';
 import { Request, Response } from 'express';
+
 import { User } from '../models/User';
 import { GetUserById } from '../services/GetUserBydIdService';
 import { CreateUserService } from '../services/CreateUserService';
@@ -25,12 +26,14 @@ class UsersController {
     const getUserById = new GetUserById();
 
     const user = await getUserById.execute(id);
+
+    // @ts-expect-error The operand of delete must be optional.
     delete user.password;
 
     return res.json(user);
   }
 
-  public async store(req: Request, res: Response): Promise<Response> {
+  public async create(req: Request, res: Response): Promise<Response> {
     const { username, password, email } = req.body;
 
     const createUserService = new CreateUserService();
@@ -41,6 +44,7 @@ class UsersController {
       email,
     });
 
+    // @ts-expect-error The operand of delete must be optional.
     delete user.password;
 
     return res.json(user);
