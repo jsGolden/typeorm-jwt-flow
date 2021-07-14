@@ -3,8 +3,10 @@ import { UsersController } from '../controllers/UsersController';
 
 const usersRoutes = Router();
 
-usersRoutes.get('/', UsersController.index);
+const usersController = new UsersController();
 
-usersRoutes.get('/:id', UsersController.show);
+usersRoutes.get('/', usersController.index);
+
+usersRoutes.get('/:id', usersController.show);
 
 export { usersRoutes };
