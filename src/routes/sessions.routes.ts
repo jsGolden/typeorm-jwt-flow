@@ -7,4 +7,6 @@ const sessionsRouter = Router();
 
 sessionsRouter.post('/', sessionsController.create);
 
+sessionsRouter.post('/refresh', sessionsController.refresh);
+
 export { sessionsRouter };

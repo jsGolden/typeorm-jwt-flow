@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { RefreshToken } from './RefreshToken';
 
 @Entity('users')
 class User {
@@ -19,6 +22,13 @@ class User {
 
   @Column()
   email: string;
+
+  @Column()
+  refresh_token: string;
+
+  @OneToOne(() => RefreshToken)
+  @JoinColumn({ name: 'refresh_token' })
+  refreshToken: RefreshToken;
 
   @CreateDateColumn()
   created_at: Date;

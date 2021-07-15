@@ -4,6 +4,7 @@ import { compare } from 'bcryptjs';
 import { AppError } from '../errors/AppError';
 import { User } from '../models/User';
 import { CreateTokenProvider } from '../providers/CreateTokenProvider';
+import { CreateRefreshTokenProvider } from '../providers/CreateRefreshTokenProvider';
 
 interface Request {
   username: string;
@@ -13,6 +14,7 @@ interface Request {
 interface Response {
   user: User;
   token: string;
+  refresh_token: string;
 }
 
 class CreateSessionService {
@@ -34,12 +36,15 @@ class CreateSessionService {
     }
 
     const createTokenProvider = new CreateTokenProvider();
-
     const token = createTokenProvider.execute(user.id);
+
+    const createRefreshTokenProvider = new CreateRefreshTokenProvider();
+    const refresh_token = await createRefreshTokenProvider.execute(user.id);
 
     return {
       user,
       token,
+      refresh_token,
     };
   }
 }
