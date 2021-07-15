@@ -1,10 +1,9 @@
 import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
-import { sign } from 'jsonwebtoken';
 
 import { AppError } from '../errors/AppError';
 import { User } from '../models/User';
-import authConfig from '../config/auth';
+import { CreateTokenProvider } from '../providers/CreateTokenProvider';
 
 interface Request {
   username: string;
@@ -34,12 +33,9 @@ class CreateSessionService {
       throw new AppError('Incorrect username/password combination!', 401);
     }
 
-    const { secret, expiresIn } = authConfig.jwt;
+    const createTokenProvider = new CreateTokenProvider();
 
-    const token = sign({}, secret, {
-      subject: user.id,
-      expiresIn,
-    });
+    const token = createTokenProvider.execute(user.id);
 
     return {
       user,
